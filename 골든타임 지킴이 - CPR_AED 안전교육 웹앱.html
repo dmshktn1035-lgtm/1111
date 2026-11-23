@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>골든타임 지킴이 - 심폐소생술·AED 안전교육</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #dc2626;
+    --primary-dark: #b91c1c;
+    --primary-light: #fef2f2;
+    --accent: #2563eb;
+    --accent-light: #eff6ff;
+    --warning: #f59e0b;
+    --warning-light: #fffbeb;
+    --success: #16a34a;
+    --success-light: #f0fdf4;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-500: #6b7280;
+    --gray-700: #374151;
+    --gray-900: #111827;
+    --white: #ffffff;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    background: var(--gray-50);
+    color: var(--gray-900);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── 헤더 ── */
+  .header {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary);
+  }
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    font-weight: 900;
+  }
+  .header-nav {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .header-nav button {
+    background: transparent;
+    border: none;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-500);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .header-nav button:hover { background: var(--gray-100); color: var(--gray-700); }
+  .header-nav button.active { background: var(--primary); color: white; }
+
+  /* ── 메인 컨테이너 ── */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .screen { display: none; }
+  .screen.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── 카드 ── */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px;
+    margin-bottom: 20px;
+    border: 1px solid var(--gray-200);
+  }
+  .card-title {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-subtitle {
+    color: var(--gray-500);
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  /* ── 메인 화면 ── */
+  .hero {
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--gray-200);
+    margin-bottom: 24px;
+  }
+  .hero-icon {
+    width: 72px;
+    height: 72px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 32px;
+    color: white;
+    box-shadow: 0 4px 12px rgba(220,38,38,0.3);
+  }
+  .hero-title {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--gray-900);
+    margin-bottom: 8px;
+  }
+  .hero-slogan {
+    font-size: 18px;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 28px;
+  }
+  .hero-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+  .hero-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 28px;
+    border-radius: var(--radius);
+    font-size: 17px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    max-width: 360px;
+    transition: all 0.2s;
+    color: white;
+  }
+  .hero-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+  .hero-btn.cpr { background: var(--primary); }
+  .hero-btn.aed { background: var(--warning); color: var(--gray-900); }
+  .hero-btn.quiz { background: var(--accent); }
+
+  .emergency-banner {
+    background: var(--primary);
+    color: white;
+    border-radius: var(--radius);
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(220,38,38,0.25);
+  }
+  .emergency-banner .icon { font-size: 28px; }
+  .emergency-banner .text { flex: 1; }
+  .emergency-banner .text strong { display: block; font-size: 16px; }
+  .emergency-banner .text span { font-size: 14px; opacity: 0.9; }
+  .emergency-banner button {
+    background: white;
+    color: var(--primary);
+    border: none;
+    padding: 12px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .emergency-banner button:hover { background: var(--gray-100); }
+
+  .disclaimer {
+    background: var(--gray-100);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--gray-500);
+    border-left: 3px solid var(--gray-300);
+    margin-top: 16px;
+  }
+
+  /* ── 단계 카드 ── */
+  .step-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-200);
+    margin-bottom: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s;
+  }
+  .step-card:hover { box-shadow: var(--shadow); }
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    cursor: pointer;
+    background: var(--white);
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .step-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .step-header.cpr-step .step-number { background: var(--primary); }
+  .step-header.aed-step .step-number { background: var(--warning); }
+  .step-header h3 { font-size: 16px; font-weight: 700; flex: 1; }
+  .step-toggle {
+    font-size: 13px;
+    color: var(--gray-500);
+    transition: transform 0.3s;
+  }
+  .step-card.open .step-toggle { transform: rotate(180deg); }
+  .step-body {
+    display: none;
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--gray-100);
+  }
+  .step-card.open .step-body { display: block; }
+
+  .step-description {
+    font-size: 15px;
+    color: var(--gray-700);
+    margin-bottom: 14px;
+    line-height: 1.7;
+  }
+  .step-caution {
+    background: var(--warning-light);
+    border-left: 4px solid var(--warning);
+    padding: 12px 16px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 14px;
+    color: var(--gray-700);
+    margin-bottom: 14px;
+  }
+  .step-caution strong { color: var(--warning); }
+  .step-detail {
+    background: var(--gray-50);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .step-detail li {
+    font-size: 14px;
+    color: var(--gray-700);
+    padding: 4px 0;
+    list-style: none;
+    position: relative;
+    padding-left: 20px;
+  }
+  .step-detail li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--success);
+    font-weight: 700;
+  }
+
+  /* ── 다이어그램 ── */
+  .diagram-box {
+    background: var(--gray-50);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    text-align: center;
+    margin: 14px 0;
+    border: 1px dashed var(--gray-300);
+  }
+  .diagram-box svg { max-width: 100%; height: auto; }
+  .diagram-caption {
+    font-size: 13px;
+    color: var(--gray-500);
+    margin-top: 8px;
+  }
+
+  /* ── AED 화면 ── */
+  .aed-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 640px) { .aed-layout { grid-template-columns: 1fr; } }
+  .aed-visual {
+    background: var(--gray-100);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+    border: 1px solid var(--gray-200);
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .aed-visual svg { max-width: 100%; }
+  .aed-label {
+    font-size: 13px;
+    color: var(--gray-500);
+    margin-top: 10px;
+    background: var(--white);
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--gray-200);
+  }
+
+  /* ── 퀴즈 ── */
+  .quiz-progress {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .quiz-dot {
+    width: 32px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--gray-200);
+    transition: background 0.3s;
+  }
+  .quiz-dot.done { background: var(--success); }
+  .quiz-dot.current { background: var(--primary); }
+  .quiz-dot.wrong { background: var(--primary); opacity: 0.4; }
+
+  .quiz-question {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .quiz-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .quiz-choice {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.2s;
+    background: var(--white);
+  }
+  .quiz-choice:hover { border-color: var(--accent); background: var(--accent-light); }
+  .quiz-choice.selected-correct {
+    border-color: var(--success);
+    background: var(--success-light);
+  }
+  .quiz-choice.selected-wrong {
+    border-color: var(--primary);
+    background: var(--primary-light);
+  }
+  .quiz-choice.correct-answer {
+    border-color: var(--success);
+    background: var(--success-light);
+  }
+  .quiz-choice.disabled { cursor: default; opacity: 0.7; }
+  .quiz-choice .letter {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .quiz-choice.selected-correct .letter,
+  .quiz-choice.correct-answer .letter { background: var(--success); color: white; }
+  .quiz-choice.selected-wrong .letter { background: var(--primary); color: white; }
+
+  .quiz-explanation {
+    background: var(--gray-50);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin-top: 16px;
+    border-left: 4px solid var(--accent);
+  }
+  .quiz-explanation .label { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+  .quiz-explanation p { font-size: 14px; color: var(--gray-700); line-height: 1.6; }
+  .quiz-explanation.correct { border-left-color: var(--success); }
+  .quiz-explanation.correct .label { color: var(--success); }
+  .quiz-explanation.wrong { border-left-color: var(--primary); }
+  .quiz-explanation.wrong .label { color: var(--primary); }
+
+  .quiz-nav {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    justify-content: space-between;
+  }
+  .btn {
+    padding: 12px 24px;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-primary { background: var(--primary); color: white; }
+  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-secondary { background: var(--gray-200); color: var(--gray-700); }
+  .btn-secondary:hover { background: var(--gray-300); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-success { background: var(--success); color: white; }
+  .btn-success:hover { background: #15803d; }
+
+  /* ── 결과 화면 ── */
+  .result-card {
+    text-align: center;
+    padding: 40px 28px;
+  }
+  .result-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 36px;
+  }
+  .result-icon.great { background: var(--success-light); color: var(--success); }
+  .result-icon.good { background: var(--warning-light); color: var(--warning); }
+  .result-icon.try-again { background: var(--primary-light); color: var(--primary); }
+  .result-score {
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--gray-900);
+    margin: 10px 0;
+  }
+  .result-score span { font-size: 24px; color: var(--gray-500); font-weight: 600; }
+  .result-stats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin: 20px 0;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-value {
+    font-size: 28px;
+    font-weight: 800;
+    display: block;
+  }
+  .stat-label { font-size: 13px; color: var(--gray-500); }
+  .stat.correct .stat-value { color: var(--success); }
+  .stat.wrong .stat-value { color: var(--primary); }
+
+  .result-message {
+    background: var(--gray-50);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin: 20px 0;
+    font-size: 15px;
+    color: var(--gray-700);
+    line-height: 1.6;
+  }
+
+  /* ── 하단 안내 ── */
+  .footer-guide {
+    background: var(--gray-900);
+    color: var(--gray-300);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-top: 24px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .footer-guide strong { color: white; }
+  .footer-guide a { color: var(--accent); }
+
+  /* ── 하단 고정 버튼 ── */
+  .floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(220,38,38,0.4);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+  }
+  .floating-btn:hover { transform: scale(1.1); }
+
+  /* ── 반응형 ── */
+  @media (max-width: 640px) {
+    .container { padding: 12px; }
+    .card { padding: 18px; }
+    .hero-title { font-size: 24px; }
+    .hero-slogan { font-size: 15px; }
+    .hero-btn { padding: 14px 20px; font-size: 15px; }
+    .card-title { font-size: 18px; }
+    .step-header { padding: 12px 14px; font-size: 14px; }
+    .step-body { padding: 0 14px 14px; }
+    .quiz-question { font-size: 15px; }
+    .quiz-choice { padding: 12px 14px; font-size: 14px; }
+    .result-score { font-size: 38px; }
+    .header-inner { padding: 10px 12px; }
+    .logo { font-size: 15px; }
+    .header-nav button { padding: 6px 10px; font-size: 12px; }
+    .floating-btn { width: 48px; height: 48px; font-size: 20px; bottom: 12px; right: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ 헤더 ═══════════════ -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">⏱</div>
+      골든타임 지킴이
+    </div>
+    <nav class="header-nav">
+      <button class="active" data-screen="main">홈</button>
+      <button data-screen="cpr">CPR 배우기</button>
+      <button data-screen="aed">AED 배우기</button>
+      <button data-screen="quiz">퀴즈</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══════════════ 본문 ═══════════════ -->
+<main class="container">
+
+  <!-- ── 메인 화면 ── -->
+  <section id="screen-main" class="screen active">
+    <div class="hero">
+      <div class="hero-icon">❤️</div>
+      <h1 class="hero-title">골든타임 지킴이</h1>
+      <p class="hero-slogan">💪 생명을 살리는 4분, 당신도 할 수 있습니다!</p>
+      <div class="hero-buttons">
+        <button class="hero-btn cpr" onclick="showScreen('cpr')">
+          🧑‍⚕️ 심폐소생술(CPR) 배우기
+        </button>
+        <button class="hero-btn aed" onclick="showScreen('aed')">
+          🔌 자동심장충격기(AED) 사용법 배우기
+        </button>
+        <button class="hero-btn quiz" onclick="showScreen('quiz')">
+          📝 응급처치 퀴즈 풀기
+        </button>
+      </div>
+    </div>
+
+    <div class="emergency-banner">
+      <div class="icon">🚨</div>
+      <div class="text">
+        <strong>지금 응급상황이라면?</strong>
+        <span>의식이 없고 정상적으로 숨을 쉬지 않는다면 즉시 119에 신고하세요.</span>
+      </div>
+      <button onclick="call119()">📞 119 바로 전화</button>
+    </div>
+
+    <div class="disclaimer">
+      ⚠️ 본 앱은 <strong>응급 상황에서 참고용 교육 자료</strong>이며, 실제 응급 상황에서는 <strong>119 신고와 의료진의 지시를 우선</strong>합니다. 본 앱이 실제 응급의료를 대체하지 않습니다.
+    </div>
+  </section>
+
+  <!-- ── CPR 교육 화면 ── -->
+  <section id="screen-cpr" class="screen">
+    <div class="card">
+      <h2 class="card-title">🧑‍⚕️ 심폐소생술(CPR) 단계별 교육</h2>
+      <p class="card-subtitle">의식이 없고 정상적으로 숨을 쉬지 않는 사람을 발견했을 때의 대응 방법입니다. (출처: 질병관리청·소방청 심폐소생술 가이드라인)</p>
+    </div>
+
+    <button class="step-card" onclick="toggleStep(this)">
+      <div class="step-header cpr-step">
+        <div class="step-number">1</div>
+        <h3>현장 안전 확인하기</h3>
+        <span class="step-toggle">▼</span>
+      </div>
+      <div class="step-body">
+        <p class="step-description">환자에게 접근하기 전에 <strong>주변이 안전한지 먼저 확인</strong>합니다. 교통사고 현장, 감전 위험, 화재, 붕괴 위험 등이 없는지 살펴봅니다. 구조자 본인의 안전이 먼저입니다.</p>
+        <div class="step-caution">
+          <strong>⚠ 주의:</strong> 안전하지 않은 현장이라면 무리하게 접근하지 말고 119에 상황을 알리세요.
+        </div>
+        <div class="diagram-box">
+          <svg viewBox="0 0 300 180" width="280" height="168">
+            <rect x="0" y="0" width="300" height="180" rx="8" fill="#f3f4f6"/>
+            <text x="150" y="40" text-anchor="middle" font-size="14" fill="#6b7280" font-weight="600">현장 안전 확인 체크리스트</text>
+            <circle cx="60" cy="80" r="18" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+            <text x="60" y="84" text-anchor="middle" font-size="18">🚗</text>
+            <text x="60" y="115" text-anchor="middle" font-size="11" fill="#374151">교통사고 위험</text>
+            <circle cx="150" cy="80" r="18" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+            <text x="150" y="84" text-anchor="middle" font-size="18">⚡</text>
+            <text x="150" y="115" text-anchor="middle" font-size="11" fill="#374151">감전 위험</text>
+            <circle cx="240" cy="80" r="18" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+            <text x="240" y="84" text-anchor="middle" font-size="18">🔥</text>
+            <text x="240" y="115" text-anchor="middle" font-size="11" fill="#374151">화재·연기</text>
+            <line x1="78" y1="80" x2="132" y2="80" stroke="#d1d5db" stroke-width="1.5"/>
+            <line x1="168" y1="80" x2="222" y2="80" stroke="#d1d5db" stroke-width="1.5"/>
+          </svg>
+          <div class="diagram-caption">주변 위험 요소를 먼저 확인하세요</div>
+        </div>
+      </div>
+    </button>
+
+    <button class="step-card" onclick="toggleStep(this)">
+      <div class="step-header cpr-step">
+        <div class="step-number">2</div>
+        <h3>반응 확인하기</h3>
+        <span class="step-toggle">▼</span>
+      </div>
+      <div class="step-body">
+        <p class="step-description">환자에게 다가가 <strong>어깨를 가볍게 두드리며</strong> 큰 소리로 "<strong>의식 확인하세요?</strong>" 라고 물어봅니다. 한쪽 손은 환자의 어깨에, 다른 손은 이마 쪽에 대고 반응을 살핍니다.</p>
+        <div class="step-caution">
+          <strong>⚠ 주의:</strong> 영아의 경우 발바닥을 가볍게 톡톡 두드려 반응을 확인합니다.
+        </div>
+        <div class="diagram-box">
+          <svg viewBox="0 0 300 200" width="280" height="186">
+            <rect x="0" y="0" width="300" height="200" rx="8" fill="#f3f4f6"/>
+            <!-- 환자(누운 사람) -->
+            <ellipse cx="150" cy="145" rx="50" ry="18" fill="#e5e7eb"/>
+            <rect x="120" y="60" width="60" height="85" rx="20" fill="#e5e7eb"/>
+            <circle cx="150" cy="55" r="18" fill="#e5e7eb"/>
+            <!-- 구조자 손 위치 (어깨) -->
+            <circle cx="115" cy="72" r="10" fill="#dc2626" opacity="0.7"/>
+            <text x="115" y="76" text-anchor="middle" font-size="14" fill="white" font-weight="700">✋</text>
+            <text x="90" y="180" text-anchor="middle" font-size="12" fill="#374151" font-weight="600">어깨 두드리기</text>
+            <!-- 말풍선 -->
+            <rect x="170" y="20" width="110" height="40" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="225" y="40" text-anchor="middle" font-size="12" fill="#2563eb" font-weight="600">"의식 확인하세요?"</text>
+            <text x="225" y="55" text-anchor="middle" font-size="10" fill="#6b7280">큰 소리로 묻기</text>
+            <line x1="170" y1="40" x2="125" y2="68" stroke="#2563eb" stroke-width="1" stroke-dasharray="3,2"/>
+          </svg>
+          <div class="diagram-caption">어깨를 두드리며 큰 소리로 반응 확인</div>
+        </div>
+      </div>
+    </button>
+
+    <button class="step-card" onclick="toggleStep(this)">
+      <div class="step-header cpr-step">
+        <div class="step-number">3</div>
+        <h3>119 신고 및 AED 요청</h3>
+        <span class="step-toggle">▼</span>
+      </div>
+      <div class="step-body">
+        <p class="step-description">주변에 사람이 있다면 <strong>큰 소리로 도움을 요청</strong>합니다. "<strong>119에 신고해 주세요!</strong>", "<strong>자동심장충격기(AED)를 가져와 주세요!</strong>" 라고 구체적으로 요청합니다. 혼자라면 직접 119에 신고하고 스피커폰을 켠 채 안내를 들으면서 심폐소생술을 시작합니다.</p>
+        <div class="step-detail">
+          <ul>
+            <li>주변 사람에게 <strong>119 신고</strong>를 부탁합니다</li>
+            <li>다른 사람에게 <strong>AED 가져오기</strong>를 요청합니다</li>
+            <li>혼자라면 <strong>스피커폰을 켜고</strong> 119 안내를 들으며 CPR 시작</li>
+            <li>119에 <strong>정확한 위치</strong>와 <strong>환자 상태</strong>를 전달</li>
+          </ul>
+        </div>
+        <div class="diagram-box">
+          <svg viewBox="0 0 300 180" width="280" height="168">
+            <rect x="0" y="0" width="300" height="180" rx="8" fill="#f3f4f6"/>
+            <!-- 환자 -->
+            <ellipse cx="150" cy="145" rx="50" ry="15" fill="#e5e7eb"/>
+            <rect x="125" y="65" width="50" height="80" rx="18" fill="#e5e7eb"/>
+            <circle cx="150" cy="60" r="16" fill="#e5e7eb"/>
+            <!-- 도움 요청 손짓 -->
+            <circle cx="80" cy="100" r="12" fill="#2563eb" opacity="0.2"/>
+            <text x="80" y="104" text-anchor="middle" font-size="22">✋</text>
+            <text x="80" y="130" text-anchor="middle" font-size="11" fill="#2563eb" font-weight="600">주변에</text>
+            <text x="80" y="142" text-anchor="middle" font-size="11" fill="#2563eb" font-weight="600">도움 요청</text>
+            <!-- 말풍선들 -->
+            <rect x="40" y="25" width="80" height="28" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+            <text x="80" y="42" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="600">"119 신고!"</text>
+            <rect x="180" y="25" width="85" height="28" rx="6" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+            <text x="222" y="42" text-anchor="middle" font-size="12" fill="#f59e0b" font-weight="600">"AED 가져와!"</text>
+          </svg>
+          <div class="diagram-caption">주변 사람에게 119 신고와 AED 요청을 구체적으로</div>
+        </div>
+      </div>
+    </button>
+
+    <button class="step-card" onclick="toggleStep(this)">
+      <div class="step-header cpr-step">
+        <div class="step-number">4</div>
+        <h3>정상 호흡 확인하기</h3>
+        <span class="step-toggle">▼</span>
+      </div>
+      <div class="step-body">
+        <p class="step-description">환자의 <strong>가슴과 배의 움직임을 10초 이내</strong>로 관찰하여 정상적으로 숨을 쉬는지 확인합니다. <strong>가슴이 오르내리는지</strong> 눈으로 확인합니다. 가끔 숨을 헐떡이는 비정상 호흡(agonal breathing)은 정상 호흡이 아닙니다.</p>
+        <div class="step-caution">
+          <strong>⚠ 주의:</strong> 호흡이 없거나 비정상적이라면 즉시 가슴압박을 시작합니다. 맥박 확인은 일반인에게 권장되지 않습니다.
+        </div>
+        <div class="diagram-box">
+          <svg viewBox="0 0 300 200" width="280" height="186">
+            <rect x="0" y="0" width="300" height="200" rx="8" fill="#f3f4f6"/>
+            <!-- 환자 -->
+            <ellipse cx="150" cy="160" rx="55" ry="18" fill="#e5e7eb"/>
+            <rect x="122" y="75" width="56" height="85" rx="20" fill="#e5e7eb"/>
+            <circle cx="150" cy="70" r="18" fill="#e5e7eb"/>
+            <!-- 호흡 표시 (가슴 움직임) -->
+            <rect x="140" y="95" width="20" height="35" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+            <text x="150" y="140" text-anchor="middle" font-size="11" fill="#dc2626" font-weight="600">가슴 움직임 확인</text>
+            <!-- 시선 표시 -->
+            <line x1="150" y1="50" x2="150" y2="95" stroke="#2563eb" stroke-width="2" stroke-dasharray="4,3"/>
+            <circle cx="150" cy="50" r="6" fill="#2563eb"/>
+            <text x="210" y="55" font-size="12" fill="#2563eb" font-weight="600">눈으로 관찰</text>
+            <!-- 10초 타이머 -->
+            <rect x="40" y="20" width="90" height="28" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="85" y="38" text-anchor="middle" font-size="13" fill="#2563eb" font-weight="700">⏱ 10초 이내</text>
+          </svg>
+          <div class="diagram-caption">가슴 움직임이 없으면 즉시 CPR 시작</div>
+        </div>
+      </div>
+    </button>
+
+    <button class="step-card" onclick="toggleStep(this)">
+      <div class="step-header cpr-step">
+        <div class="step-number">5</div>
+        <h3>가슴압박 방법</h3>
+        <span class="step-toggle">▼</span>
+      </div>
+      <div class="step-body">
+        <p class="step-description">환자의 <strong>가슴 중앙(유두 사이 흉골)</strong>에 손깍지를 끼고 팔을 곧게 펴 체중을 실어 누릅니다. 압박 후에는 가슴이 완전히 올라오도록 힘을 뺍니다.</p>
+        <div class="step-detail">
+          <ul>
+            <li><strong>압박 위치:</strong> 가슴 중앙, 유두 사이 흉골</li>
+            <li><strong>압박 깊이:</strong> 약 5~6cm (성인 기준)</li>
+            <li><strong>압박 속도:</strong> 분당 100~120회 (빠르지 않게, 일정하게)</li>
+            <li><strong>압박 후:</strong> 가슴이 완전히 올라오도록 힘을 완전히 뺌</li>
+            <li><strong>인공호흡이 어려우면:</strong> 가슴압박만 계속합니다 — 멈추지 않는 것이 더 중요</li>
+          </ul>
+        </div>
+        <div class="diagram-box">
+          <svg viewBox="0 0 300 240" width="280" height="224">
+            <rect x="0" y="0" width="300" height="240" rx="8" fill="#f3f4f6"/>
+            <!-- 환자 몸통 -->
+            <ellipse cx="150" cy="150" rx="60" ry="80" fill="#fce4e4" stroke="#dc2626" stroke-width="2"/>
+            <!-- 가슴 중앙 표시 -->
+            <circle cx="150" cy="140" r="10" fill="#dc2626"/>
+            <text x="150" y="144" text-anchor="middle" font-size="10" fill="white" font-weight="800">★</text>
+            <!-- 손 위치 (압박) -->
+            <rect x="125" y="120" width="50" height="35" rx="6" fill="#2563eb" opacity="0.5"/>
+            <rect x="125" y="120" width="50" height="35" rx="6" fill="none" stroke="#2563eb" stroke-width="2"/>
+            <text x="150" y="170" text-anchor="middle" font-size="12" fill="#2563eb" font-weight="700">손깍지</text>
+            <!-- 팔 직선 -->
+            <line x1="150" y1="138" x2="150" y2="70" stroke="#374151" stroke-width="6" stroke-linecap="round"/>
+            <!-- 화살표 (체중 실음) -->
+            <line x1="150" y1="50" x2="150" y2="130" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow)"/>
+            <defs>
+              <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M0,0 L6,4 L0,8 Z" fill="#dc2626"/>
+              </marker>
+            </defs>
+            <text x="165" y="100" font-size="13" fill="#dc2626" font-weight="700">체중 실기</text>
+            <!-- 라벨 -->
+            <text x="150" y="230" text-anchor="middle" font-size="12" fill="#374151" font-weight="600">가슴 중앙 (유두 사이 흉골)</text>
+          </svg>
+          <div class="diagram-caption">가슴 중앙, 손깍지, 팔 곧게, 체중 실기</div>
+        </div>
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="startBeat()" id="beatBtn">
+            🥁 압박 리듬 시작 (분당 110회)
+          </button>
+          <span id="beatStatus" style="font-size:14px; color:#6b7280; align-self:center;">대기 중</span>
+        </div>
+        <div id="beatVisual" style="text-align:center; margin-top:10px; display:none;">
+          <div style="width:60px; height:60px; border-radius:50%; background:#dc2626; margin:0 auto; transition:transform 0.1s, background 0.1s;" id="beatCircle"></div>
+        </div>
+      </div>
+    </button>
+
+    <div style="text-align:center; margin-top:16px;">
+      <button class="btn btn-secondary" onclick="showScreen('main')">← 홈으로 돌아가기</button>
+      <button class="btn btn-primary" onclick="showScreen('aed')" style="margin-left:8px;">AED 사용법 배우기 →</button>
+    </div>
+  </section>
+
+  <!-- ── AED 교육 화면 ── -->
+  <section id="screen-aed" class="screen">
+    <div class="card">
+      <h2 class="card-title">🔌 자동심장충격기(AED) 사용법</h2>
+      <p class="card-subtitle">AED가 도착하면 전원을 켜고 음성 안내에 따라 단계별로 진행합니다. AED는 일반인도 쉽게 사용할 수 있도록 설계되어 있습니다.</p>
+    </div>
+
+    <div class="aed-layout">
+      <!-- 왼쪽: 텍스트 설명 -->
+      <div>
+        <button class="step-card" onclick="toggleStep(this)">
+          <div class="step-header aed-step">
+            <div class="step-number">1</div>
+            <h3>AED 전원 켜기</h3>
+            <span class="step-toggle">▼</span>
+          </div>
+          <div class="step-body">
+            <p class="step-description">AED 커버를 열거나 전원 버튼을 누르면 <strong>음성 안내가 시작</strong>됩니다. 대부분의 AED는 커버를 여는 순간 자동으로 전원이 켜집니다. 음성 안내를 잘 듣고 따라하세요.</p>
+            <div class="step-caution"><strong>⚠ 주의:</strong> 전원을 켠 후에는 AED 음성 안내를 계속 들으면서 진행합니다.</div>
+          </div>
+        </button>
+
+        <button class="step-card" onclick="toggleStep(this)">
+          <div class="step-header aed-step">
+            <div class="step-number">2</div>
+            <h3>패드 부착하기</h3>
+            <span class="step-toggle">▼</span>
+          </div>
+          <div class="step-body">
+            <p class="step-description">패드 보호지를 떼고, 환자 <strong>가슴 피부에 직접</strong> 붙입니다. 패드 그림은 부착 위치를 보여주므로 그림대로 붙이면 됩니다.</p>
+            <div class="step-detail">
+              <ul>
+                <li><strong>패드 1:</strong> 오른쪽 빗장뼈(쇄골) 아래</li>
+                <li><strong>패드 2:</strong> 왼쪽 겨드랑이 아래 갈비뼈 부위</li>
+                <li>패드와 피부 사이에 <strong>옷, 땀, 물</strong>이 없도록</li>
+                <li>페이스메이커가 있다면 <strong> 패드 위치를 피함</strong></li>
+              </ul>
+            </div>
+            <div class="diagram-box">
+              <svg viewBox="0 0 300 280" width="280" height="261">
+                <rect x="0" y="0" width="300" height="280" rx="8" fill="#f3f4f6"/>
+                <!-- 환자 몸통 -->
+                <ellipse cx="150" cy="150" rx="65" ry="90" fill="#f0f9ff" stroke="#2563eb" stroke-width="2"/>
+                <!-- 오른쪽 패드 (빗장뼈 아래) -->
+                <rect x="90" y="75" width="40" height="30" rx="5" fill="#f59e0b"/>
+                <rect x="90" y="75" width="40" height="30" rx="5" fill="none" stroke="#d97706" stroke-width="2"/>
+                <text x="110" y="70" text-anchor="middle" font-size="11" fill="#f59e0b" font-weight="700">패드 1</text>
+                <text x="110" y="180" text-anchor="middle" font-size="11" fill="#374151">오른쪽 빗장뼈 아래</text>
+                <!-- 왼쪽 패드 (겨드랑이 아래) -->
+                <rect x="170" y="210" width="40" height="30" rx="5" fill="#f59e0b"/>
+                <rect x="170" y="210" width="40" height="30" rx="5" fill="none" stroke="#d97706" stroke-width="2"/>
+                <text x="190" y="205" text-anchor="middle" font-size="11" fill="#f59e0b" font-weight="700">패드 2</text>
+                <text x="190" y="250" text-anchor="middle" font-size="11" fill="#374151">왼쪽 겨드랑이 아래</text>
+              </svg>
+              <div class="diagram-caption">패드 부착 위치 (그림대로 붙이면 됩니다)</div>
+            </div>
+          </div>
+        </button>
+
+        <button class="step-card" onclick="toggleStep(this)">
+          <div class="step-header aed-step">
+            <div class="step-number">3</div>
+            <h3>심장리듬 분석하기</h3>
+            <span class="step-toggle">▼</span>
+          </div>
+          <div class="step-body">
+            <p class="step-description">AED가 심장 리듬을 분석할 때는 <strong>환자에게서 모두 떨어집니다</strong>. 아무도 환자에게 닿거나 움직이지 않도록 합니다. 분석 중에는 AED의 음성 안내를 따릅니다.</p>
+            <div class="step-caution"><strong>⚠ 주의:</strong> 분석 중에는 환자에게서 떨어지고, 누구도 환자를 만지지 않도록 합니다.</div>
+          </div>
+        </button>
+
+        <button class="step-card" onclick="toggleStep(this)">
+          <div class="step-header aed-step">
+            <div class="step-number">4</div>
+            <h3>제세동(쇼크) 실시하기</h3>
+            <span class="step-toggle">▼</span>
+          </div>
+          <div class="step-body">
+            <p class="step-description">AED가 <strong>"쇼크가 필요합니다"</strong> 라고 안내하면 쇼크 버튼이 깜빡입니다. <strong>모두 환자에게서 떨어졌는지 확인</strong>하고 쇼크 버튼을 누릅니다.</p>
+            <div class="step-caution"><strong>⚠ 주의:</strong> 쇼크 버튼이 깜빡일 때 주변에 아무도 환자에게 닿지 않았는지 반드시 확인하고 버튼을 누릅니다.</div>
+            <div style="margin-top:12px; padding:14px; background:#dc2626; border-radius:8px; text-align:center; color:white; font-weight:700; font-size:15px;">
+              ⚡ 쇼크 버튼이 깜빡이면 → 모두 떨어졌는지 확인 → 버튼 누르기
+            </div>
+          </div>
+        </button>
+
+        <button class="step-card" onclick="toggleStep(this)">
+          <div class="step-header aed-step">
+            <div class="step-number">5</div>
+            <h3>쇼크 후 즉시 CPR 재개</h3>
+            <span class="step-toggle">▼</span>
+          </div>
+          <div class="step-body">
+            <p class="step-description">쇼크가 끝나면 <strong>바로 가슴압박을 다시 시작</strong>합니다. AED는 계속 켜둔 채 음성 안내를 따릅니다. AED가 다시 분석을 시작하라고 안내할 때까지 CPR을 계속합니다.</p>
+            <div class="step-detail">
+              <ul>
+                <li>쇼크 후 <strong>즉시 가슴압박 재개</strong></li>
+                <li>AED는 <strong>계속 켜둔 채</strong> 안내에 따름</li>
+                <li>AED가 재분석을 안내할 때까지 CPR 지속</li>
+              </ul>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <!-- 오른쪽: 시각 자료 -->
+      <div class="aed-visual">
+        <div id="aedVisual">
+          <svg viewBox="0 0 200 180" width="180" height="162">
+            <rect x="0" y="0" width="200" height="180" rx="8" fill="#f3f4f6"/>
+            <text x="100" y="30" text-anchor="middle" font-size="13" fill="#6b7280" font-weight="600">AED (자동심장충격기)</text>
+            <!-- AED 기기 -->
+            <rect x="60" y="45" width="80" height="60" rx="10" fill="#dc2626"/>
+            <text x="100" y="75" text-anchor="middle" font-size="22">⚡</text>
+            <text x="100" y="92" text-anchor="middle" font-size="11" fill="white" font-weight="700">AED</text>
+            <!-- 전원 버튼 -->
+            <circle cx="100" cy="130" r="8" fill="#374151"/>
+            <text x="100" y="134" text-anchor="middle" font-size="9" fill="white" font-weight="700">전원</text>
+            <!-- 패드 케이블 -->
+            <path d="M60,75 Q40,90 40,110" stroke="#d1d5db" stroke-width="2" fill="none"/>
+            <path d="M140,75 Q160,90 160,110" stroke="#d1d5db" stroke-width="2" fill="none"/>
+            <text x="100" y="165" text-anchor="middle" font-size="11" fill="#374151">음성 안내에 따라 사용</text>
+          </svg>
+        </div>
+        <div class="aed-label" id="aedStepLabel">1. AED 전원 켜기</div>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:16px;">
+      <button class="btn btn-secondary" onclick="showScreen('cpr')">← CPR 배우기</button>
+      <button class="btn btn-secondary" onclick="showScreen('quiz')" style="margin-left:8px;">퀴즈 풀러 가기 →</button>
+      <button class="btn btn-primary" onclick="showScreen('main')" style="margin-left:8px;">홈으로</button>
+    </div>
+  </section>
+
+  <!-- ── 퀴즈 화면 ── -->
+  <section id="screen-quiz" class="screen">
+    <div class="card">
+      <h2 class="card-title">📝 응급처치 퀴즈</h2>
+      <p class="card-subtitle">심폐소생술과 AED 사용법에 대한 문제를 풀어보세요. 총 10문제입니다.</p>
+    </div>
+
+    <div id="quizArea">
+      <div class="quiz-progress" id="quizProgress"></div>
+      <div class="quiz-question" id="quizQuestion"></div>
+      <div class="quiz-choices" id="quizChoices"></div>
+      <div id="quizExplanation"></div>
+      <div class="quiz-nav">
+        <button class="btn btn-secondary" id="prevBtn" onclick="prevQuiz()">← 이전</button>
+        <button class="btn btn-primary" id="nextBtn" onclick="nextQuiz()">다음 →</button>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:16px;">
+      <button class="btn btn-secondary" onclick="showScreen('main')">← 홈으로</button>
+      <button class="btn btn-secondary" onclick="showScreen('cpr')" style="margin-left:8px;">CPR 복습</button>
+      <button class="btn btn-secondary" onclick="showScreen('aed')" style="margin-left:8px;">AED 복습</button>
+    </div>
+  </section>
+
+  <!-- ── 결과 화면 ── -->
+  <section id="screen-result" class="screen">
+    <div class="card result-card">
+      <div class="result-icon" id="resultIcon">🏆</div>
+      <h2 style="font-size:22px; font-weight:800; margin-bottom:4px;">퀴즈 결과</h2>
+      <p style="color:#6b7280; font-size:14px; margin-bottom:16px;">응급처치 퀴즈 채점 완료</p>
+      <div class="result-score">
+        <span id="resultScore">0</span>
+        <span> / 10</span>
+      </div>
+      <div class="result-stats">
+        <div class="stat correct">
+          <span class="stat-value" id="correctCount">0</span>
+          <span class="stat-label">정답</span>
+        </div>
+        <div class="stat wrong">
+          <span class="stat-value" id="wrongCount">0</span>
+          <span class="stat-label">오답</span>
+        </div>
+      </div>
+      <div class="result-message" id="resultMessage"></div>
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <button class="btn btn-success" onclick="retryQuiz()">🔄 다시 풀기</button>
+        <button class="btn btn-secondary" onclick="showScreen('main')">← 홈으로</button>
+        <button class="btn btn-secondary" onclick="showScreen('cpr')" style="margin-left:8px;">CPR 복습</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════════════ 하단 안내 ═══════════════ -->
+<div class="footer-guide">
+  <strong>📞 실제 응급상황에서는 즉시 119에 신고하세요.</strong><br>
+  본 앱은 <strong>응급 상황 참고용 교육 자료</strong>이며, 실제 응급의료를 대체하지 않습니다.<br>
+  구급대원이 도착할 때까지 심폐소생술과 AED를 계속 사용하세요.<br>
+  교육 내용 참고: 질병관리청·소방청 심폐소생술 가이드라인
+</div>
+
+<!-- ═══════════════ 고정 버튼 ═══════════════ -->
+<button class="floating-btn" onclick="showScreen('main')" title="홈으로 이동">🏠</button>
+
+<!-- ═══════════════ 스크립트 ═══════════════ -->
+<script>
+  // ── 화면 전환 ──
+  function showScreen(name) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + name).classList.add('active');
+    document.querySelectorAll('.header-nav button').forEach(b => {
+      b.classList.toggle('active', b.dataset.screen === name);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('.header-nav button').forEach(btn => {
+    btn.addEventListener('click', () => showScreen(btn.dataset.screen));
+  });
+
+  // ── 단계 토글 ──
+  function toggleStep(el) {
+    el.classList.toggle('open');
+  }
+
+  // ── 119 전화 ──
+  function call119() {
+    window.location.href = 'tel:119';
+  }
+
+  // ── 가슴압박 리듬 ──
+  let beatInterval = null;
+  let beatRunning = false;
+  function startBeat() {
+    if (beatRunning) { stopBeat(); return; }
+    beatRunning = true;
+    const speed = 110;
+    const ms = Math.round(60000 / speed);
+    document.getElementById('beatBtn').textContent = '⏹ 멈춤';
+    document.getElementById('beatStatus').textContent = '💓 압박 타이밍 진행 중 (분당 110회)';
+    document.getElementById('beatVisual').style.display = 'block';
+    let on = true;
+    document.getElementById('beatCircle').style.transform = 'scale(1.2)';
+    document.getElementById('beatCircle').style.background = '#dc2626';
+    beatInterval = setInterval(() => {
+      on = !on;
+      const el = document.getElementById('beatCircle');
+      if (on) {
+        el.style.transform = 'scale(1.2)';
+        el.style.background = '#dc2626';
+      } else {
+        el.style.transform = 'scale(1)';
+        el.style.background = '#fca5a5';
+      }
+    }, ms);
+  }
+  function stopBeat() {
+    beatRunning = false;
+    if (beatInterval) { clearInterval(beatInterval); beatInterval = null; }
+    document.getElementById('beatBtn').textContent = '🥁 압박 리듬 시작 (분당 110회)';
+    document.getElementById('beatStatus').textContent = '대기 중';
+    document.getElementById('beatCircle').style.transform = 'scale(1)';
+    document.getElementById('beatCircle').style.background = '#dc2626';
+    document.getElementById('beatVisual').style.display = 'none';
+  }
+
+  // ── AED 화면 시각 업데이트 ──
+  const AED_VISUALS = {
+    1: { label: '1. AED 전원 켜기', svg: '<svg viewBox="0 0 200 180" width="180" height="162"><rect x="0" y="0" width="200" height="180" rx="8" fill="#f3f4f6"/><text x="100" y="30" text-anchor="middle" font-size="13" fill="#6b7280" font-weight="600">AED 전원 켜기</text><rect x="60" y="45" width="80" height="60" rx="10" fill="#dc2626"/><text x="100" y="75" text-anchor="middle" font-size="22">⚡</text><text x="100" y="92" text-anchor="middle" font-size="11" fill="white" font-weight="700">AED</text><circle cx="100" cy="130" r="8" fill="#374151"/><text x="100" y="134" text-anchor="middle" font-size="9" fill="white" font-weight="700">전원</text></svg>' },
+    2: { label: '2. 패드 부착하기', svg: '<svg viewBox="0 0 200 180" width="180" height="162"><rect x="0" y="0" width="200" height="180" rx="8" fill="#f3f4f6"/><text x="100" y="25" text-anchor="middle" font-size="12" fill="#6b7280" font-weight="600">패드 부착 위치</text><ellipse cx="100" cy="100" rx="50" ry="65" fill="#f0f9ff" stroke="#2563eb" stroke-width="2"/><rect x="75" y="55" width="25" height="18" rx="3" fill="#f59e0b"/><rect x="100" y="130" width="25" height="18" rx="3" fill="#f59e0b"/><text x="100" y="175" text-anchor="middle" font-size="10" fill="#374151">오른쪽 빗장뼈 아래 / 왼쪽 겨드랑이 아래</text></svg>' },
+    3: { label: '3. 심장리듬 분석', svg: '<svg viewBox="0 0 200 180" width="180" height="162"><rect x="0" y="0" width="200" height="180" rx="8" fill="#f3f4f6"/><text x="100" y="30" text-anchor="middle" font-size="13" fill="#6b7280" font-weight="600">분석 중 — 접촉 금지</text><rect x="55" y="50" width="90" height="50" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/><text x="100" y="78" text-anchor="middle" font-size="22">⚠</text><text x="100" y="140" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="600">모두 떨어지기</text></svg>' },
+    4: { label: '4. 제세동(쇼크) 실시', svg: '<svg viewBox="0 0 200 180" width="180" height="162"><rect x="0" y="0" width="200" height="180" rx="8" fill="#f3f4f6"/><text x="100" y="30" text-anchor="middle" font-size="13" fill="#6b7280" font-weight="600">쇼크 필요 — 버튼 누르기</text><rect x="55" y="50" width="90" height="50" rx="8" fill="#dc2626"/><text x="100" y="78" text-anchor="middle" font-size="22">⚡</text><text x="100" y="140" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="700">모두 떨어진 것 확인 후</text></svg>' },
+    5: { label: '5. CPR 재개', svg: '<svg viewBox="0 0 200 180" width="180" height="162"><rect x="0" y="0" width="200" height="180" rx="8" fill="#f3f4f6"/><text x="100" y="30" text-anchor="middle" font-size="13" fill="#6b7280" font-weight="600">쇼크 후 CPR 재개</text><ellipse cx="100" cy="110" rx="40" ry="50" fill="#fce4e4" stroke="#dc2626" stroke-width="2"/><rect x="80" y="85" width="40" height="25" rx="4" fill="#2563eb" opacity="0.5"/><text x="100" y="165" text-anchor="middle" font-size="12" fill="#374151">가슴압박 다시 시작</text></svg>' }
+  };
+  document.querySelectorAll('#screen-aed .step-card').forEach((card, i) => {
+    card.addEventListener('click', () => {
+      const num = i + 1;
+      const v = AED_VISUALS[num];
+      document.getElementById('aedStepLabel').textContent = v.label;
+      document.getElementById('aedVisual').innerHTML = v.svg;
+    });
+  });
+
+  // ── 퀴즈 ──
+  const QUIZ_ITEMS = [
+    { q: "의식이 없고 정상적으로 숨을 쉬지 않는 사람을 발견했을 때 가장 먼저 할 일은?", choices: ["즉시 가슴압박을 시작한다", "119에 신고하고 주변 도움을 요청한다", "물을 먹여본다", "환자를 옆으로 눕힌다"], answer: 1, explain: "먼저 119 신고와 AED 요청을 하고, 혼자라면 신고 후 바로 가슴압박을 시작합니다." },
+    { q: "반응 확인 시 환자에게 어떻게 해야 하나요?", choices: ["발목을 잡고 들어 올린다", "어깨를 가볍게 두드리며 큰 소리로 묻는다", "눈을 감긴다", "물에 적신 수건을 얼굴에 댄다"], answer: 1, explain: "어깨를 가볍게 두드리며 '의식 확인하세요?' 라고 큰 소리로 물어봐 반응을 확인합니다." },
+    { q: "성인 가슴압박의 적절한 속도는?", choices: ["분당 60~80회", "분당 100~120회", "분당 140~160회", "느릴수록 좋다"], answer: 1, explain: "분당 100~120회 속도로, 깊이는 약 5~6cm가 권장됩니다." },
+    { q: "성인 가슴압박의 적절한 깊이는?", choices: ["약 2~3cm", "약 5~6cm", "약 8~10cm", "깊이는 중요하지 않다"], answer: 1, explain: "성인 기준 가슴압박 깊이는 약 5~6cm입니다." },
+    { q: "가슴압박 후 어떻게 해야 하나요?", choices: ["가슴이 완전히 올라오도록 힘을 뺀다", "계속 누른 상태를 유지한다", "환자를 옆으로 돌린다", "물을 먹인다"], answer: 0, explain: "압박 후에는 가슴이 완전히 올라오도록 힘을 완전히 빼야 다음 압박이 효과적입니다." },
+    { q: "AED가 '쇼크가 필요합니다'라고 안내했을 때 올바른 행동은?", choices: ["바로 버튼을 누른다", "모두 환자에게서 떨어졌는지 확인하고 버튼을 누른다", "환자에게 여전히 손을 대고 있다", "기계를 끄고 기다린다"], answer: 1, explain: "쇼크 버튼이 깜빡이면 주변에 아무도 환자에게 닿지 않았는지 확인하고 버튼을 누릅니다." },
+    { q: "AED 패드는 어디에 붙이나요?", choices: ["양쪽 팔뚝", "오른쪽 빗장뼈 아래 / 왼쪽 겨드랑이 아래 갈비뼈 부위", "양쪽 허벅지", "이마와 가슴"], answer: 1, explain: "패드 1은 오른쪽 빗장뼈 아래, 패드 2는 왼쪽 겨드랑이 아래 갈비뼈 부위에 붙입니다." },
+    { q: "AED가 심장 리듬을 분석할 때 올바른 행동은?", choices: ["환자에게 계속 가슴압박을 한다", "모두 환자에게서 떨어진다", "AED를 끈다", "환자에게 물을 먹인다"], answer: 1, explain: "분석 중에는 모두 환자에게서 떨어지고 누구도 환자를 만지지 않도록 합니다." },
+    { q: "현장 안전 확인은 왜 필요한가요?", choices: ["시간을 끌기 위해서", "구조자 본인의 안전을 먼저 확보하기 위해서", "환자를 더 아프게 하기 위해서", "필요하지 않다"], answer: 1, explain: "교통사고, 감전, 화재 등 위험 요소가 없는지 먼저 확인해야 구조자도 안전합니다." },
+    { q: "인공호흡이 어려울 때 올바른 대처는?", choices: ["가슴압박을 멈추고 기다린다", "가슴압박만 계속한다", "환자에게 물을 먹인다", "환자를 병원에 데려간다"], answer: 1, explain: "인공호흡이 어려우면 가슴압박만 계속합니다. 멈추지 않고 계속하는 것이 더 중요합니다." }
+  ];
+
+  let quizIdx = 0;
+  let quizScore = 0;
+  let quizAnswered = false;
+  let quizResults = [];
+
+  function renderQuiz() {
+    quizAnswered = false;
+    const item = QUIZ_ITEMS[quizIdx];
+
+    // 진행 표시
+    const progress = document.getElementById('quizProgress');
+    progress.innerHTML = '';
+    for (let i = 0; i < QUIZ_ITEMS.length; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'quiz-dot';
+      if (quizResults[i] === true) dot.classList.add('done');
+      else if (quizResults[i] === false) dot.classList.add('wrong');
+      if (i === quizIdx) dot.classList.add('current');
+      progress.appendChild(dot);
+    }
+
+    document.getElementById('quizQuestion').textContent = `${quizIdx + 1}. ${item.q}`;
+
+    const choices = document.getElementById('quizChoices');
+    choices.innerHTML = '';
+    const letters = ['A', 'B', 'C', 'D'];
+    item.choices.forEach((c, i) => {
+      const div = document.createElement('div');
+      div.className = 'quiz-choice';
+      div.innerHTML = `<span class="letter">${letters[i]}</span><span>${c}</span>`;
+      div.addEventListener('click', () => answerQuiz(i));
+      choices.appendChild(div);
+    });
+
+    document.getElementById('quizExplanation').innerHTML = '';
+    document.getElementById('prevBtn').disabled = quizIdx === 0;
+    document.getElementById('nextBtn').textContent = quizIdx < QUIZ_ITEMS.length - 1 ? '다음 →' : '결과 보기';
+  }
+
+  function answerQuiz(selected) {
+    if (quizAnswered) return;
+    quizAnswered = true;
+    const item = QUIZ_ITEMS[quizIdx];
+    const isCorrect = selected === item.answer;
+    if (isCorrect) quizScore++;
+    quizResults[quizIdx] = isCorrect;
+
+    const choices = document.getElementById('quizChoices');
+    const letters = ['A', 'B', 'C', 'D'];
+    choices.querySelectorAll('.quiz-choice').forEach((el, i) => {
+      el.classList.add('disabled');
+      if (i === item.answer) el.classList.add('correct-answer');
+      if (i === selected && isCorrect) el.classList.add('selected-correct');
+      if (i === selected && !isCorrect) el.classList.add('selected-wrong');
+    });
+
+    const expl = document.getElementById('quizExplanation');
+    expl.innerHTML = `
+      <div class="quiz-explanation ${isCorrect ? 'correct' : 'wrong'}">
+        <div class="label">${isCorrect ? '✅ 정답입니다!' : '❌ 오답입니다'}</div>
+        <p>${item.explain}</p>
+      </div>
+    `;
+    document.getElementById('nextBtn').textContent = quizIdx < QUIZ_ITEMS.length - 1 ? '다음 →' : '결과 보기';
+  }
+
+  function nextQuiz() {
+    if (!quizAnswered) return;
+    if (quizIdx < QUIZ_ITEMS.length - 1) {
+      quizIdx++;
+      renderQuiz();
+    } else {
+      showResult();
+    }
+  }
+  function prevQuiz() {
+    if (quizIdx > 0 && quizAnswered) {
+      quizIdx--;
+      renderQuiz();
+    }
+  }
+
+  function showResult() {
+    showScreen('result');
+    document.getElementById('resultScore').textContent = quizScore;
+    document.getElementById('correctCount').textContent = quizScore;
+    document.getElementById('wrongCount').textContent = QUIZ_ITEMS.length - quizScore;
+
+    const icon = document.getElementById('resultIcon');
+    const msg = document.getElementById('resultMessage');
+    if (quizScore >= 8) {
+      icon.className = 'result-icon great';
+      icon.textContent = '🏆';
+      msg.textContent = '👏 훌륭합니다! 심폐소생술과 AED 사용에 대해 잘 이해하고 계십니다. 실제 응급 상황에서도 침착하게 대응할 수 있을 거예요. 주변 사람들에게도 이 교육을 알려주세요!';
+    } else if (quizScore >= 5) {
+      icon.className = 'result-icon good';
+      icon.textContent = '👍';
+      msg.textContent = '📚 꽤 잘하셨어요! 몇 가지 더 익히면 완벽해질 거예요. CPR과 AED 단계를 다시 복습하고 퀴즈를 다시 풀어보세요.';
+    } else {
+      icon.className = 'result-icon try-again';
+      icon.textContent = '💪';
+      msg.textContent = '📖 괜찮아요! 처음 배우는 내용은 익숙하지 않을 수 있어요. CPR 단계별 가이드와 AED 사용법 화면을 다시 보고 퀴즈를 다시 풀어보세요. 생명을 살리는 방법을 익히는 데 걸리는 시간은 충분히 가치 있습니다.';
+    }
+  }
+
+  function retryQuiz() {
+    quizIdx = 0;
+    quizScore = 0;
+    quizAnswered = false;
+    quizResults = new Array(QUIZ_ITEMS.length).fill(null);
+    showScreen('quiz');
+    renderQuiz();
+  }
+
+  // 초기 렌더링
+  renderQuiz();
+</script>
+
+</body>
+</html>
